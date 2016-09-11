@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="By Pulkit" content="Dating Website Project">
+	<title>DATING WEBSITE</title>
+	<style type="text/css">
+
+	form {font-weight: bold;
+		}
+	
+		.field{
+			border:10px solid yellow;
+			 background:lightyellow;
+			 margin-bottom:10px;
+			 width: 720px;
+		}
+		
+		.al input{
+			margin-bottom: 7px;
+
+
+		}
+		.al label{
+			float: left;
+			width: 180px;
+			text-align: right;
+			padding-right: 10px;
+
+
+		}
+		.al label:hover
+		{
+			font-size: 17px;
+		}
+		input:hover{
+			font-size: 17px;
+		}
+    #sh {
+    	background-color: red; color:azure; font-size:larger;
+    }
+    #ta {
+    	background-color: purple; color:azure  ; font-size:larger;
+    }
+    #po {
+    	background-color: red; color:azure; font-size:larger;
+    }
+    #ri {
+    	background-color: purple; color:azure  ; font-size:larger;
+    }
+#nam, #ag, #dob, #color, #country, #email, #mobile, #address{
+	width:360px; 
+	height:50px;
+}
+
+
+	</style>
+	<script src="https://www.cse.ust.hk/~rossiter/dating_web_site.js"></script>
+
+</head>
+<body>
+<h1>Please Enter Your Details For Our Dating Website!</h1>
+
+<form action=" http://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" method="post" enctype= "multipart/form-data">
+
+
+	<fieldset  class= "field" >	
+		<legend >  <h3>Your Face</h3></legend>
+	<div class="al">
+
+	<label class="txt" for="imgreceived">Your Image:</label>	<input type="file" name="imgreceived" id = "imgreceived" required/><br>
+	<label for ="preview">Image Preview:</label>  	<img id="preview" width="100px" >
+
+
+
+</div>
+	</fieldset>
+
+
+
+	<br>
+
+	<fieldset   class ="field">
+		<legend > <h3>Your General Details</h3></legend>
+		<div class="al">
+			<label class="txt" for="nam">Name:</label>
+			<input type="text" name="nam" id="nam" placeholder ="Your Full Name" required><br>
+			<label class="txtr" for="gen">Gender:</label> 
+			<input type="radio" name="gen" value="male" id = "gen" required>Male 
+			<input type="radio" name="gen" value="female" id ="gen" required>Female<br>
+			<label class="txt" for="id">Age:</label>
+			<input type="number" name="age" id="ag" min="0" max="99" required><br>
+			<label class="txt"for="dob">Date of birth:</label> 
+			<input type="date" name="dob" id="dob"><br>
+			<label class="txt" for="color">Favourite color:</label>
+			<input type="color" name="color" id="color"><br>
+			<label class="txt" for="country">Country:</label>
+			<select name="country" id="country">
+<option value="">No Selection</option>
+<option value="AF">Afghanistan</option>
+<option value="AL">Albania</option>
+<option value="DZ">Algeria</option>
+<option value="AS">USA</option>
+<option value="NA">Canada</option>
+
+
+</select><br>
+</div>
+</fieldset>
+<br>
+
+
+
+
+	<fieldset   class ="field">
+		<legend ><h3>Your Indicators</h3> </legend>
+	<div class="al">	
+		<label class="txt"for="height">Height:</label>
+		<span id="sh">Short</span>
+		<input type="range" name="height" id = "height"  min="0" max = "100" />
+		<span id="ta">Tall</span><br>
+		<label class="txt" for="salary">Salary:</label> 
+		<span  id="po">Poor</span> 
+		<input type="range" name="salary" min="0" max = "100"/>
+		<span  id="ri">Rich</span>
+     </div>  
+	</fieldset>
+
+<br>
+
+
+
+	<fieldset    class ="field">
+		<legend ><h3>Your Contact Information</h3></legend>
+
+		<div class="al">
+		 <label class="txt" for = "email">Email:</label>
+		 <input type="email" name="email" id = "email" required><br>
+		<label class="txt" for="mobile">Mobile:</label>
+		<input type="tel" name="mobile" id="mobile"><br>
+		<label class="txt" for="address">Address:</label>
+		 <textarea name="address" rows="4" cols="30" id="address"></textarea><br>
+
+		<label class="txtr">Method to contact you:</label>
+		<input type="checkbox" name="checked"  value="email">Email
+		<input type="checkbox" name="checked" value="whatsapp" >Whatsapp
+		<input type="checkbox" name="checked"  value="inappchat">In-app chat
+
+</div>
+
+ </fieldset>
+ <br>
+ <input type="submit" value="Submit!!">
+
+</form>
+</body>
+</html>
