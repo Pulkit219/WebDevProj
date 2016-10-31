@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tap Tap Game </title>
+	<style type="text/css">
+		.win{color: green;}</style>
+
+</head>
+
+<body>
+<h1><span id="p1display">0</span> to <span id="p2display">0</span></h1>
+
+<p>Playing to : <span id = "playingTo">8</span></p>
+
+<ul>
+	<li>Input target number or use default one</li>
+	<li>First Green is the winner</li>
+	<li>Good kuck!</li>
+	
+</ul>
+
+<input type="number" name="num" id="inp" placeholder="Select target in number">
+
+<button id ="btn1">Player one</button>
+<button id ="btn2">Player two</button>
+<button id ="rst">Reset</button>
+
+<script>
+var button1 = document.querySelector("#btn1");
+var button2 = document.querySelector("#btn2");
+var p1dp = document.querySelector("#p1display");
+var p2dp = document.querySelector("#p2display");
+var btnreset = document.querySelector("#rst");
+var getinp = document.querySelector("#inp");
+var playingto = document.querySelector("#playingTo");
+var clickcounter1 = 0;
+var clickcounter2 = 0;
+var gameover = false;
+var winscore = 8;
+
+
+button1.addEventListener("click", function(){
+if(!gameover){
+	
+clickcounter1++;
+p1dp.textContent = clickcounter1;
+if(clickcounter1 === winscore){
+p1display.classList.add("win");
+	gameover = true;
+	p1dp.textContent = winscore;
+}
+}
+});
+
+button2.addEventListener("click", function(){
+if(!gameover){
+	
+clickcounter2++;
+p2dp.textContent = clickcounter2;
+if(clickcounter2 === winscore){
+p2display.classList.add("win");
+	gameover = true;
+	p2dp.textContent = winscore;
+}
+}
+});
+btnreset.addEventListener("click", function(){
+	reset();
+// gameover = false;
+// clickcounter2 = 0;
+// clickcounter1 = 0;
+// p1display.textContent = clickcounter1;
+// p2display.textContent = clickcounter2;
+// p1display.classList.remove("win");
+// p2display.classList.remove("win");
+
+});
+getinp.addEventListener("change", function(){
+playingto.textContent = getinp.value;
+winscore = Number(getinp.value);
+reset();
+});
+
+
+
+function reset()
+{
+	gameover = false;
+clickcounter2 = 0;
+clickcounter1 = 0;
+p1display.textContent = clickcounter1;
+p2display.textContent = clickcounter2;
+p1display.classList.remove("win");
+p2display.classList.remove("win");
+
+}
+</script>
+</body>
+</html>
