@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Color Guessing game </title>
+
+	<style type="text/css">
+		.square{
+			width: 30%;
+	background: purple;
+	padding-bottom: 30%;
+	float: left;
+	margin: 1.66%;
+		}
+		#container{
+			margin: 20px auto;
+	max-width: 600px;
+		}
+		h1{
+			color: white;
+			text-align: center;
+		}
+		body{
+			background-color: #232323;
+		}
+	
+	    #stripes{
+	    	    background: white;
+      text-align: center;
+    height: 30px;
+	    }
+	    .selected{
+	    	background: blue;
+	    }
+
+	</style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+<h1>The RGB <span id="rgbDisplay"></span> Color Game</h1>
+<div id="stripes">
+<button id="reset">New colors</button>
+<button id="easybtn" >Easy</button>
+<button id="hardbtn" class="selected">Hard</button>
+	<span id="messagedisp"></span>
+</div>
+
+
+ <div id="container">
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  
+ </div>
+
+
+
+
+
+
+
+
+
+ <script type="text/javascript">
+ 	var colors =  generateRandomColors(6);
+
+ 	var getBoxes = document.querySelectorAll(".square");
+ 	var colorPicked  = randomlyPickedColor();
+ 	var messageDsp = document.querySelector("#messagedisp");
+ 	var rgbDisplay = document.querySelector("#rgbDisplay");
+ 	var h1 = document.querySelector("h1");
+ 	var resetbtn = document.querySelector("#reset");
+ 	var easybt = document.querySelector("#easybtn");
+ 	var hardbt = document.querySelector("#hardbtn");
+ 	rgbDisplay.textContent = colorPicked;
+
+
+
+ 	easybt.addEventListener("click", function (){
+ 		easybt.classList.add("selected");
+ 		hardbt.classList.remove("selected");
+       colors =  generateRandomColors(3);
+         colorPicked  = randomlyPickedColor();
+         rgbDisplay.textContent = colorPicked;
+          messageDsp.textContent = "";
+          resetbtn.textContent = "New colors";
+          for (var i = 0; i < getBoxes.length; i++) {
+          	if(colors[i]){
+          		getBoxes[i].style.background = colors[i];
+          	}
+          	else{
+          		getBoxes[i].style.display = "none";
+          	}
+          }
+
+ 	});
+
+
+
+hardbt.addEventListener("click", function (){
+	easybt.classList.remove("selected");
+ 		hardbt.classList.add("selected");
+       colors =  generateRandomColors(6);
+         colorPicked  = randomlyPickedColor();
+         rgbDisplay.textContent = colorPicked;
+          messageDsp.textContent = "";
+          resetbtn.textContent = "New colors";
+          for (var i = 0; i < getBoxes.length; i++) {
+          	getBoxes[i].style.background = colors[i];
+          	getBoxes[i].style.display = "block";
+          }
+
+ 	});
+
+
+
+
+ 	resetbtn.addEventListener("click", function(){
+
+ 		 colors =  generateRandomColors(6);
+         colorPicked  = randomlyPickedColor();
+         rgbDisplay.textContent = colorPicked;
+          messageDsp.textContent = "";
+          resetbtn.textContent = "New colors";
+
+         for (var i = 0; i < getBoxes.length; i++) {
+         getBoxes[i].style.background = colors[i];
+         getBoxes[i].style.display = "block";
+
+
+ 	}
+ 	h1.style.background = "#232323";
+
+ 	});
+
+
+
+
+ 	for (var i = 0; i < getBoxes.length; i++) {
+
+ 		getBoxes[i].style.background = colors[i];
+
+ 		getBoxes[i].addEventListener("click", function(){
+
+ 			var colorClicked  = this.style.background;
+
+ 			if(colorClicked === colorPicked)
+ 			{
+                h1.style.background = colorPicked;
+                console.log(colorPicked);
+                messageDsp.textContent = "Correct";
+               changeBoxesToSameColor(colorClicked);
+               resetbtn.textContent = "Play Again?";
+                }
+            
+            else{
+            	 this.style.background = "#232323";
+            	messageDsp.textContent = "Try again";
+            }
+ 		})
+
+ 	}
+    function changeBoxesToSameColor(color){
+    	 for (var i = 0; i < getBoxes.length; i++) {
+                	getBoxes[i].style.background = color;}}
+
+   function randomlyPickedColor(){
+   var random = Math.floor(Math.random() * colors.length);
+   return colors[random];
+
+   }
+   function generateRandomColors(num){
+    var array = [];
+    for (var i = 0; i < num; i++) {
+     array.push(randomColor());
+    	
+    }
+ return array;
+   }
+
+
+   function randomColor(){
+  var r = Math.floor(Math.random() * 256);
+  var g = Math.floor(Math.random() * 256);
+  var b = Math.floor(Math.random() * 256);
+ return "rgb(" + r +","+" "+ g + "," +" " + b +")"
+ }
+ 	</script>
+</body>
+</html>
