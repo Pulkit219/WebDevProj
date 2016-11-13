@@ -1,38 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Color Guessing game </title>
+  <title>Color Guessing game </title>
 
-	<style type="text/css">
-		.square{
-			width: 30%;
-	background: purple;
-	padding-bottom: 30%;
-	float: left;
-	margin: 1.66%;
-		}
-		#container{
-			margin: 20px auto;
-	max-width: 600px;
-		}
-		h1{
-			color: white;
-			text-align: center;
-		}
-		body{
-			background-color: #232323;
-		}
-	
-	    #stripes{
-	    	    background: white;
+  <style type="text/css">
+    .square{
+      width: 30%;
+  background: purple;
+  padding-bottom: 30%;
+  float: left;
+  margin: 1.66%;
+  border-radius: 15%;
+  transition: background 0.5s;
+    }
+
+    #container{
+      margin: 20px auto;
+  max-width: 600px;
+    }
+
+    h1{
+      color: white;
+      text-align: center;
+      background-color: steelblue;
+      margin: 0;
+      font-weight: normal;
+      padding: 20px 0;
+      text-transform: uppercase;
+    }
+
+    body{
+      background-color: #232323;
+      margin:0; 
+      font-family: "Montserrat", "Avenir";
+
+    }
+  
+
+      #stripes{
+            background: white;
       text-align: center;
     height: 30px;
-	    }
-	    .selected{
-	    	background: blue;
-	    }
+      }
 
-	</style>
+
+      .selected{
+        background: steelblue;
+      }
+
+      #rgbDisplay{
+        font-size: 150%;
+      }
+
+      button{
+        background: none;
+    border: none;
+    height: 100%;
+    letter-spacing:  5PX;
+    /* WORD-SPACING: 30PX; */
+    font-weight: 800;
+    color: rgb(165, 160, 4);
+    text-transform:  uppercase;
+    font-size: inherit;
+    transition: all 0.9s;
+    outline: none;
+    -webkit-transition: all 0.9s;
+    -moz-transition: all 0.9s;
+    padding-right: 25px;
+      }
+
+    button:hover{
+      background: steelblue;
+        outline: none;
+      color: white;
+    }
+      #messagedisp{
+        display: inline-block;
+        width: 12%;
+        color: red;
+        text-transform: uppercase;
+
+      }
+      
+
+  </style>
 </head>
 
 
@@ -49,17 +100,35 @@
 
 
 
+
+
+
+
+
+
+
+
 <body>
-<h1>The RGB <span id="rgbDisplay"></span> Color Game</h1>
+<h1>The RGB 
+<br>
+<span id="rgbDisplay"></span>
+<br> 
+Color Game</h1>
 <div id="stripes">
 <button id="reset">New colors</button>
-<button id="easybtn" >Easy</button>
-<button id="hardbtn" class="selected">Hard</button>
-	<span id="messagedisp"></span>
+<span id="messagedisp"></span>
+<button class="mode">Easy</button>
+<button class="mode selected">Hard</button>
+<button class="mode">Very Hard</button>
+
+  
 </div>
 
 
  <div id="container">
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
   <div class="square"></div>
   <div class="square"></div>
   <div class="square"></div>
@@ -77,91 +146,60 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
  <script type="text/javascript">
- 	var colors =  generateRandomColors(6);
-
- 	var getBoxes = document.querySelectorAll(".square");
- 	var colorPicked  = randomlyPickedColor();
- 	var messageDsp = document.querySelector("#messagedisp");
- 	var rgbDisplay = document.querySelector("#rgbDisplay");
- 	var h1 = document.querySelector("h1");
- 	var resetbtn = document.querySelector("#reset");
- 	var easybt = document.querySelector("#easybtn");
- 	var hardbt = document.querySelector("#hardbtn");
- 	rgbDisplay.textContent = colorPicked;
-
-
-
- 	easybt.addEventListener("click", function (){
- 		easybt.classList.add("selected");
- 		hardbt.classList.remove("selected");
-       colors =  generateRandomColors(3);
-         colorPicked  = randomlyPickedColor();
-         rgbDisplay.textContent = colorPicked;
-          messageDsp.textContent = "";
-          resetbtn.textContent = "New colors";
-          for (var i = 0; i < getBoxes.length; i++) {
-          	if(colors[i]){
-          		getBoxes[i].style.background = colors[i];
-          	}
-          	else{
-          		getBoxes[i].style.display = "none";
-          	}
-          }
-
- 	});
-
-
-
-hardbt.addEventListener("click", function (){
-	easybt.classList.remove("selected");
- 		hardbt.classList.add("selected");
-       colors =  generateRandomColors(6);
-         colorPicked  = randomlyPickedColor();
-         rgbDisplay.textContent = colorPicked;
-          messageDsp.textContent = "";
-          resetbtn.textContent = "New colors";
-          for (var i = 0; i < getBoxes.length; i++) {
-          	getBoxes[i].style.background = colors[i];
-          	getBoxes[i].style.display = "block";
-          }
-
- 	});
+  var numSquares = 6;
+  var colors =  generateRandomColors(numSquares);
+  var getBoxes = document.querySelectorAll(".square");
+  var colorPicked  = randomlyPickedColor();
+  var messageDsp = document.querySelector("#messagedisp");
+  var rgbDisplay = document.querySelector("#rgbDisplay");
+  var h1 = document.querySelector("h1");
+  var resetbtn = document.querySelector("#reset");
+  var selectedMode = document.querySelectorAll(".mode");
+  rgbDisplay.textContent = colorPicked;
 
 
 
 
- 	resetbtn.addEventListener("click", function(){
 
- 		 colors =  generateRandomColors(6);
-         colorPicked  = randomlyPickedColor();
-         rgbDisplay.textContent = colorPicked;
-          messageDsp.textContent = "";
-          resetbtn.textContent = "New colors";
+init();
 
-         for (var i = 0; i < getBoxes.length; i++) {
-         getBoxes[i].style.background = colors[i];
-         getBoxes[i].style.display = "block";
+ function init(){
+  sqSetUp();
+    modeSelected();
+    reset();
+  }
+ 
 
+ resetbtn.addEventListener("click", function(){
 
- 	}
- 	h1.style.background = "#232323";
-
- 	});
+ reset();
+ 
+  });
 
 
+function sqSetUp(){
 
+  for (var i = 0; i < getBoxes.length; i++) {
 
- 	for (var i = 0; i < getBoxes.length; i++) {
+    getBoxes[i].style.background = colors[i];
 
- 		getBoxes[i].style.background = colors[i];
+    getBoxes[i].addEventListener("click", function(){
 
- 		getBoxes[i].addEventListener("click", function(){
+      var colorClicked  = this.style.background;
 
- 			var colorClicked  = this.style.background;
-
- 			if(colorClicked === colorPicked)
- 			{
+      if(colorClicked === colorPicked)
+      {
                 h1.style.background = colorPicked;
                 console.log(colorPicked);
                 messageDsp.textContent = "Correct";
@@ -170,15 +208,74 @@ hardbt.addEventListener("click", function (){
                 }
             
             else{
-            	 this.style.background = "#232323";
-            	messageDsp.textContent = "Try again";
+               this.style.background = "#232323";
+              messageDsp.textContent = "Try again";
             }
- 		})
+    })
 
- 	}
+  }
+
+
+
+}
+  
+
+function modeSelected(){
+
+    for (var i = 0; i < selectedMode.length; i++) {
+       selectedMode[i].addEventListener("click", function(){
+
+        selectedMode[0].classList.remove("selected");  
+        selectedMode[1].classList.remove("selected"); 
+        selectedMode[2].classList.remove("selected"); 
+          this.classList.add("selected");
+          if(this.textContent === "Easy"){
+            numSquares = 3;
+          } else if (this.textContent === "Very Hard"){
+            numSquares = 9;
+          }
+          else{
+          	numSquares = 6;
+          }
+
+        reset();
+
+
+
+       })
+  
+  }
+
+
+}
+
+
+
+   function reset(){
+   colors =  generateRandomColors(numSquares)
+    colorPicked  = randomlyPickedColor()
+    rgbDisplay.textContent = colorPicked;
+     messageDsp.textContent = "";
+    resetbtn.textContent = "New colors";
+    h1.style.background = "steelblue";
+
+           for (var i = 0; i < getBoxes.length; i++) {
+            if(colors[i]){
+             getBoxes[i].style.display = "block";
+             getBoxes[i].style.background = colors[i]
+            }
+          else
+          {
+            getBoxes[i].style.display = "none";
+          }
+        }
+ }
+
+
+
     function changeBoxesToSameColor(color){
-    	 for (var i = 0; i < getBoxes.length; i++) {
-                	getBoxes[i].style.background = color;}}
+       for (var i = 0; i < getBoxes.length; i++) {
+                  getBoxes[i].style.background = color;}}
 
    function randomlyPickedColor(){
    var random = Math.floor(Math.random() * colors.length);
@@ -189,7 +286,7 @@ hardbt.addEventListener("click", function (){
     var array = [];
     for (var i = 0; i < num; i++) {
      array.push(randomColor());
-    	
+      
     }
  return array;
    }
@@ -201,6 +298,9 @@ hardbt.addEventListener("click", function (){
   var b = Math.floor(Math.random() * 256);
  return "rgb(" + r +","+" "+ g + "," +" " + b +")"
  }
- 	</script>
+
+
+
+  </script>
 </body>
 </html>
